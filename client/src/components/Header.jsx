@@ -2,9 +2,12 @@ import React from "react"
 import "../index.css"
 import {Link} from "react-router-dom"
 
-export default function Header(){
+export default function Header(props){
 
   const  windowWidth = window.innerWidth
+const {scrollToSection, home, about, contact, education} = props
+
+
 
     if(windowWidth > 800){
         return(
@@ -17,8 +20,10 @@ export default function Header(){
                 </Link>
                 </div>
                 <div className="links">
-                <Link className="link" to="/">Home</Link>
-                <Link className="link" to="/about">About</Link>
+                <li onClick={()=> scrollToSection(home)} className="link" >Home</li>
+                <li onClick={()=> scrollToSection(about)} className="link" >About</li>
+                <li onClick={()=> scrollToSection(education)} className="link">Education</li>
+                <li onClick={()=> scrollToSection(contact)} className="link" >Contact</li>
                 </div>
                 </div>
                 <div className="headerTransition">
