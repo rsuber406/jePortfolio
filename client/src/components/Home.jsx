@@ -70,7 +70,7 @@ const scenes = [{
                  <div className="firstBody" >
                      <div style={{marginLeft:"10%"}}>
                      <h1 style={{fontSize:"65px", color:"white"}}>Hello, I am <span style={{color:"red"}}>Je!</span></h1>
-                     <h2 style={{fontSize:"35px", color:"white"}}>I create 3d models and scenes for films</h2>
+                     <h2 style={{fontSize:"35px", color:"white"}}>I capture scenes and edit them to create films</h2>
                      </div>
                 </div>
                 <div>

@@ -44,6 +44,7 @@ body{
     text-decoration: none;
     list-style: none;
     transition: color 250ms linear 0ms;
+    cursor:pointer;
 }
 
 .link:hover {
@@ -161,6 +162,8 @@ body{
    flex-direction: column;
    align-items: center;
    justify-content: center;
+   cursor:pointer;
+   margin-left:5px;
 }
 .sceneTemplate:hover {
     border: solid red 2px;
@@ -200,5 +203,9 @@ body{
     margin-left:5%
 }
 .contactSubmit{
-    margin-top:25px;
+    margin-top:1.25%;
+    border:none;
+    border-radius:20px;
+    width:3%;
+    cursor: pointer;
 }
