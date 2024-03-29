@@ -5,7 +5,7 @@ import {Link} from "react-router-dom"
 export default function Header(props){
 
   const  windowWidth = window.innerWidth
-const {scrollToSection, home, about, contact, education} = props
+const {scrollToSection, home, about, contact, education, user} = props
 
 
 
@@ -24,6 +24,7 @@ const {scrollToSection, home, about, contact, education} = props
                 <li onClick={()=> scrollToSection(about)} className="link" >About</li>
                 <li onClick={()=> scrollToSection(education)} className="link">Education</li>
                 <li onClick={()=> scrollToSection(contact)} className="link" >Contact</li>
+               {user ? <Link to="/" className="link">Sign Out</Link> :<Link to="/signin" className="link">Sign In</Link>}
                 </div>
                 </div>
                 <div className="headerTransition">

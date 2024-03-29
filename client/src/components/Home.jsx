@@ -13,18 +13,18 @@ const [selectedModel, setSelectedModel] = React.useState({
     modelName: ""
 })
 
-const scenes = [{
-    title: "First Scene",
-    short: "My First Scene",
-    description: "This is a scene of some real estate",
-    img: ""
-}
-]
 // This will be how we write the backend for the addition of a video. It needs to be a string and then split into an array
 const stringTest = `<iframe width="560" height="315" src="https://www.youtube.com/embed/lkxLFMQNMVo?si=DLJHZqE401fgsyhC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`
 const splitTest = stringTest.split(" ")
 console.log(splitTest)
 
+const scenes = [{
+    title: "First Scene",
+    short: "My First Scene",
+    description: "This is a scene of some real estate",
+    src: splitTest[3]
+}
+]
 
     const windowWidth = window.innerWidth
 
@@ -45,7 +45,7 @@ console.log(splitTest)
         })
     }
 
-    const displayScene = scenes.map(scene => <SceneTemplate title={scene.title} img={scene.img} shortDescription={scene.short} />)
+    const displayScene = scenes.map(scene => <SceneTemplate title={scene.title}  shortDescription={scene.short} link={scene.src} />)
     
 
 
