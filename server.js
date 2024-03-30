@@ -14,11 +14,18 @@ server.use(morgan('dev'))
 
 server.use(express.json())
 
+mongoose.connect(process.env.dbAuth, console.log('connected to db'))
+
 server.use("/api/auth", expressjwt({secret:process.env.SECRET, algorithms:['HS256']}))
 
 server.use('/api', require('./routes/authRouter.js'))
 
 server.use("/api", require('./routes/videoRouter.js'))
 
+server.use("/api", require('./routes/imgRouter.js'))
+
+server.use((err, req,res,next)=>{
+    res.send({errMsg: err.message})
+})
 
 server.listen(8173, console.log('server is listening'))

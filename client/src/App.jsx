@@ -1,11 +1,13 @@
 import React from 'react'
-import Header from './components/Header'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import About from './components/About'
-import Home from './components/Home'
-import Contact from './components/Contact'
-import { ApiContext } from './ApiContext'
-import SignIn from './components/SignIn'
+import Header from './components/Header.jsx'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import About from './components/About.jsx'
+import Home from './components/Home.jsx'
+import Contact from './components/Contact.jsx'
+import { ApiContext } from './ApiContext.jsx'
+import SignIn from './components/SignIn.jsx'
+import Admin from './components/Admin.jsx'
+import ProtectedRoute from "./components/ProtectedRoute.jsx"
 
 
 
@@ -57,7 +59,9 @@ export default function App(){
 </div>
 </>
 } />
-<Route path='/admin' element={<></>} />
+<Route path='/admin' element={<ProtectedRoute token={user.token}>
+    <Admin  />
+</ProtectedRoute>} />
 <Route path='/signin' element={user.token? <Navigate to="/admin" /> : <SignIn />} />
     </Routes>
 

@@ -6,7 +6,7 @@ const userSchema = new Schema({
     username: {
         type:String,
         required: true,
-        unique: true
+       
     },
     password: {
         type:String,
@@ -42,7 +42,7 @@ userSchema.methods.withoutPassword = function(){
    
     const user = this.toObject()
     delete user.password
-   delete user.username
+   
     return user
 }
 

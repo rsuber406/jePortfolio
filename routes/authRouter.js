@@ -8,11 +8,12 @@ const authRouter = express.Router()
 authRouter.post("/signup", async(req,res)=>{
     try {
         const foundOne = User.findOne({username: req.body.username})
-        if(foundOne){
+        
+        if(foundOne.username){
             res.status(403).send("forbidden username")
         }
 
-        if(!foundOne){
+        if(!foundOne.username){
             const newUser = new User(req.body)
             await newUser.save()
             const token = jwt.sign(newUser.withoutPassword(), process.env.SECRET)
@@ -45,6 +46,7 @@ authRouter.post('/login', async(req,res)=>{
         }
         else res.status(403).send("username or password is incorrect")
     } catch (err) {
+        console.log(err)
         res.status(500)
         res.json({message:"Error with the route"})
     }

@@ -3,18 +3,27 @@ import axios from 'axios'
 
 const ApiContext = React.createContext()
 
+const userAxios = axios.create()
+
+userAxios.interceptors.request.use(config=>{
+    const token = localStorage.getItem('TokenJe')
+    config.headers.Authorization = `Bearer ${token}`
+    return config
+})
 
 function ApiContextProvider(props){
 const [user, setUser] = React.useState({
     user: localStorage.getItem('login')? JSON.parse(localStorage.getItem('login')) : "",
-    token: localStorage.getItem('JeToken')? localStorage.getItem('JeToken'): ""
+    token: localStorage.getItem('TokenJe')? localStorage.getItem('TokenJe'): ""
 })
-console.log(user,'user')
+
 
 const [login, setLogin] = React.useState({
     username:"",
     password:""
 })
+
+const [file, setFile] = React.useState(null)
 
 function updateState(setState, name, value){
  setState(prevState => {
@@ -25,11 +34,18 @@ function updateState(setState, name, value){
  })
 }
 
+function handleFile(event){
+    const {files} = event.target
+  
+    setFile(files[0])
+}
+
 function handleState(event, state){
     const {name,value} = event.target 
     if(state === "login"){
         updateState(setLogin, name, value)
     }
+   
 }
 
 function signIn(event){
@@ -45,12 +61,7 @@ function signIn(event){
                     token: res.data.token
                 }
             }))
-            .catch(err => setUser(prevState => {
-                return{
-                    ...prevState,
-                    errMsg: err.res.data.errMsg
-                }
-            }))
+            .catch(err => console.log(err))
     }
 }
 
@@ -65,6 +76,17 @@ function logOut(){
         }
     })
 }
+console.log(file)
+function updatePhoto(event){
+    event.preventDefault()
+    if(file != null){
+        const formData = new FormData()
+            formData.append('photo', file)
+        userAxios.post("/api/auth/updateImg", formData)
+                .then(res => console.log(res))
+                .catch(err => console.log(err))
+    }
+}
 
 
     return(
@@ -72,7 +94,9 @@ function logOut(){
             user,
             handleState,
             logOut,
-            signIn
+            signIn,
+            updatePhoto,
+            handleFile
 
         }}>{props.children} </ApiContext.Provider>
     )
