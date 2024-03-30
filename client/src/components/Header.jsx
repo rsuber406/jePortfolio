@@ -6,8 +6,11 @@ export default function Header(props){
 
   const  windowWidth = window.innerWidth
 const {scrollToSection, home, about, contact, education, user} = props
+const [displayNav, setDisplayNav] = React.useState(false)
 
-
+function showNav(){
+    setDisplayNav(prevState => !prevState)
+}
 
     if(windowWidth > 800){
         return(
@@ -20,11 +23,14 @@ const {scrollToSection, home, about, contact, education, user} = props
                 </Link>
                 </div>
                 <div className="links">
-                <li onClick={()=> scrollToSection(home)} className="link" >Home</li>
+
+               <li onClick={()=> scrollToSection(home)} className="link" >Home</li>
+
                 <li onClick={()=> scrollToSection(about)} className="link" >About</li>
                 <li onClick={()=> scrollToSection(education)} className="link">Education</li>
                 <li onClick={()=> scrollToSection(contact)} className="link" >Contact</li>
                {user ? <Link to="/" className="link">Sign Out</Link> :<Link to="/signin" className="link">Sign In</Link>}
+               {user && <Link to="/admin" className="link">Admin</Link>}
                 </div>
                 </div>
                 <div className="headerTransition">
@@ -32,6 +38,37 @@ const {scrollToSection, home, about, contact, education, user} = props
                 </div>
             </div>
             </>
+        )
+    }
+
+    else {
+        return(
+            <div className="headerContainer">
+                <div className="subHeadContainer">
+                <div className="headerIntro">
+                    <Link className="nameLink" to="/">
+                <span>Je</span><span> |</span> <span className="headerMyName"> Cragman</span>
+                </Link>
+                </div>
+                <div className="links">
+                    <div style={{backgroundColor: "white"}}>
+                      {displayNav ? <h2 onClick={showNav}>X</h2> : <h2 onClick={showNav}>&#9776;</h2>}
+             {displayNav && <li onClick={()=> scrollToSection(home)} className="link" >Home</li>}
+
+            { displayNav && <li onClick={()=> scrollToSection(about)} className="link" >About</li>}
+              { displayNav &&<li onClick={()=> scrollToSection(education)} className="link">Education</li>}
+              {displayNav && <li onClick={()=> scrollToSection(contact)} className="link" >Contact</li>}
+             {displayNav && <div>
+
+               {user ? <Link to="/" className="link">Sign Out</Link> :<Link to="/signin" className="link">Sign In</Link>}
+               {user && <Link to="/admin" className="link">Admin</Link>}
+              </div>}
+
+                    </div>
+                </div>
+                </div>
+               
+            </div>
         )
     }
 

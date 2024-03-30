@@ -22,7 +22,7 @@ server.use('/api', require('./routes/authRouter.js'))
 
 server.use("/api", require('./routes/videoRouter.js'))
 
-server.use("/api", require('./routes/imgRouter.js'))
+server.use("/api", require('./routes/imgRouterPng.js'))
 
 server.use((err, req,res,next)=>{
     res.send({errMsg: err.message})

@@ -8,6 +8,7 @@ import { ApiContext } from './ApiContext.jsx'
 import SignIn from './components/SignIn.jsx'
 import Admin from './components/Admin.jsx'
 import ProtectedRoute from "./components/ProtectedRoute.jsx"
+import Education from './components/Education.jsx'
 
 
 
@@ -50,7 +51,7 @@ export default function App(){
   </div>
 
   <div ref={education}>
-
+    <Education />
   </div>
 
 

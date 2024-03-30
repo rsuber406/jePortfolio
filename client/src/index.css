@@ -90,15 +90,20 @@ body{
 }
 .firstBody{
     width:30%;
-  
+ 
 
 }
-
-.eventViewer{
+.event{
    
     width:70%;
-    display:flex;
-    justify-content: start;
+}
+.eventViewer{
+   margin-left: 45%;
+    
+}
+.myImg{
+    border-radius:50%;
+    
 }
 
 .showModels{
@@ -218,4 +223,61 @@ body{
     width:100%;
    
    background-color:black;
+}
+
+.admin{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    color:white;
+   
+}
+
+.uploadVideo{
+    display:flex;
+    flex-direction: column;
+    width:30%;
+    align-items: center;
+  
+}
+.videoFormCont{
+    margin-top:10%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+.uploadPhotoContainer{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top:10%;
+
+}
+.uploadPhoto{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.photoSubmit{
+    margin-top:5%;
+    border:none;
+    border-radius: 25px;
+    cursor: pointer;
+}
+.educationCard{
+    color:white;
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    width:25%;
+    border:white solid 2px;
+    border-radius: 25px;
+    margin-left:25%;
+    transition:border 250ms linear 0ms;
+    padding:15px;
+
+}
+.educationCard:hover{
+    border:red solid 2px;
 }

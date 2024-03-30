@@ -3,6 +3,7 @@ const express = require('express')
 const imgRouter = express.Router()
 
 const multer = require('multer')
+// multer will deal with the photos for you so long as you follow the below steps exactly as they are done.
 
 const storage = multer.diskStorage({
     destination: (req,file,cb) => {
@@ -16,11 +17,10 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage: storage})
 
-const fs = require('fs')
-
 imgRouter.post("/auth/updateImg", upload.single('photo'), async(req,res) =>{
     try {
-     console.log(req.auth._id)
+        
+     
       console.log("something happened")
 //`/client/public/assets/photos/myPhoto.${fileType}`
         

@@ -13,7 +13,7 @@ userAxios.interceptors.request.use(config=>{
 
 function ApiContextProvider(props){
 const [user, setUser] = React.useState({
-    user: localStorage.getItem('login')? JSON.parse(localStorage.getItem('login')) : "",
+    user: localStorage.getItem('JeUser')? JSON.parse(localStorage.getItem('JeUser')) : "",
     token: localStorage.getItem('TokenJe')? localStorage.getItem('TokenJe'): ""
 })
 
@@ -23,7 +23,13 @@ const [login, setLogin] = React.useState({
     password:""
 })
 
+const [video, setVideo] = React.useState({
+    src: ""
+})
+
 const [file, setFile] = React.useState(null)
+
+const [createdVideo, setCreatedVideo] = React.useState([])
 
 function updateState(setState, name, value){
  setState(prevState => {
@@ -45,9 +51,24 @@ function handleState(event, state){
     if(state === "login"){
         updateState(setLogin, name, value)
     }
-   
+   if(state === "video"){
+    updateState(setVideo, name, value)
+   }
 }
 
+function handleVideo(input){
+    setVideo(prevState => {
+        return{
+            ...prevState,
+            src: input
+        }
+    })
+}
+function getVideos(){
+    axios.get("/api/allVideos")
+        .then(res => setCreatedVideo(res.data))
+        .catch(err => console.log(err))
+}
 function signIn(event){
     event.preventDefault()
     if(login.username && login.password != ""){
@@ -76,10 +97,26 @@ function logOut(){
         }
     })
 }
-console.log(file)
+
+function checkPng(input){
+ const split = input.split(".")
+ console.log(split)
+ if(split[1] === "png"){
+    return true
+ }
+}
+
+function addVideo(event){
+    event.preventDefault()
+    userAxios.post("/api/auth/newVideo", video)
+            .then(res => console.log(res.data))
+            .catch(err => console.log(err))
+}
+
 function updatePhoto(event){
     event.preventDefault()
-    if(file != null){
+    if(file != null && checkPng(file.name)){
+        console.log("is true")
         const formData = new FormData()
             formData.append('photo', file)
         userAxios.post("/api/auth/updateImg", formData)
@@ -87,7 +124,9 @@ function updatePhoto(event){
                 .catch(err => console.log(err))
     }
 }
-
+React.useEffect(()=>{
+    getVideos()
+},[])
 
     return(
         <ApiContext.Provider value={{
@@ -96,7 +135,10 @@ function updatePhoto(event){
             logOut,
             signIn,
             updatePhoto,
-            handleFile
+            handleFile,
+            handleVideo,
+            addVideo,
+            createdVideo
 
         }}>{props.children} </ApiContext.Provider>
     )

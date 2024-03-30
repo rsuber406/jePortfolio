@@ -2,11 +2,11 @@ import React from "react"
 import "../index.css"
 import Transition from "./Transition"
 import SceneTemplate from "./SceneTemplate"
-
+import { ApiContext } from "../ApiContext"
 
 
 export default function Home(){
-
+const {createdVideo} = React.useContext(ApiContext)
 const [viewModel, setViewModel] = React.useState(false)
 const [selectedModel, setSelectedModel] = React.useState({
     filePath: "",
@@ -18,13 +18,7 @@ const stringTest = `<iframe width="560" height="315" src="https://www.youtube.co
 const splitTest = stringTest.split(" ")
 console.log(splitTest)
 
-const scenes = [{
-    title: "First Scene",
-    short: "My First Scene",
-    description: "This is a scene of some real estate",
-    src: splitTest[3]
-}
-]
+
 
     const windowWidth = window.innerWidth
 
@@ -45,7 +39,7 @@ const scenes = [{
         })
     }
 
-    const displayScene = scenes.map(scene => <SceneTemplate title={scene.title}  shortDescription={scene.short} link={scene.src} />)
+    const displayScene = createdVideo.map(scene => <SceneTemplate title={scene.title}  shortDescription={scene.short} link={scene.src} />)
     
 
 
@@ -61,8 +55,12 @@ const scenes = [{
                      <h2 style={{fontSize:"35px", color:"white"}}>I capture scenes and edit them to create films</h2>
                      </div>
                 </div>
-                <div>
-                    {/* Insert photos from scenes that will change after five seconds */}
+                <div className="event">
+
+                     <div className="eventViewer">
+                        <img width={"100%"} height={window.innerHeight / 3} className="myImg" src="/assets/photos/myPhoto.png" />
+                     </div>
+                
                 </div>
             </div>
          
