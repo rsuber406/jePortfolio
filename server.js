@@ -24,6 +24,8 @@ server.use("/api", require('./routes/videoRouter.js'))
 
 server.use("/api", require('./routes/imgRouterPng.js'))
 
+server.use("/api", require('./routes/emailer.js'))
+
 server.use((err, req,res,next)=>{
     res.send({errMsg: err.message})
 })

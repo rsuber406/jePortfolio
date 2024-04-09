@@ -31,6 +31,12 @@ const [file, setFile] = React.useState(null)
 
 const [createdVideo, setCreatedVideo] = React.useState([])
 
+const [mailObj, setMailObj] = React.useState({
+    name: '',
+    email: '',
+    phone: ''
+})
+
 function updateState(setState, name, value){
  setState(prevState => {
     return{
@@ -53,6 +59,10 @@ function handleState(event, state){
     }
    if(state === "video"){
     updateState(setVideo, name, value)
+   }
+
+   if(state == "mail"){
+    updateState(setMailObj, name, value)
    }
 }
 
@@ -124,6 +134,12 @@ function updatePhoto(event){
                 .catch(err => console.log(err))
     }
 }
+
+function sendEmail(){
+    axios.post("api/sendMail", mailObj)
+    .then(res => console.log(res.status))
+    .catch(err => console.log(err.res.data))
+}
 React.useEffect(()=>{
     getVideos()
 },[])
@@ -138,7 +154,8 @@ React.useEffect(()=>{
             handleFile,
             handleVideo,
             addVideo,
-            createdVideo
+            createdVideo,
+            sendEmail
 
         }}>{props.children} </ApiContext.Provider>
     )

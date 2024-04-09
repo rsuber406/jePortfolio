@@ -24,9 +24,7 @@ console.log(splitTest)
 
     const customHeight = windowWidth * 0.20
 
-    const heightSytle={
-        height:customHeight
-    }
+  
 
     function changeView(path){
         console.log(path)
@@ -45,10 +43,10 @@ console.log(splitTest)
 
     return(
         <>
-        <div className="homeBody">
+        <div  className="homeBody">
             
             
-            <div style={heightSytle} className="myJob">
+            <div  className="myJob">
                  <div className="firstBody" >
                      <div style={{marginLeft:"10%"}}>
                      <h1 style={{fontSize:"65px", color:"white"}}>Hello, I am <span style={{color:"red"}}>Je!</span></h1>
@@ -64,7 +62,7 @@ console.log(splitTest)
                 </div>
             </div>
          
-            <div style={ heightSytle} className="showModels">
+            <div  className="showModels">
               <div className="myModels">
               <h1  style={{color: "red"}}>My Scenes</h1>
               </div>

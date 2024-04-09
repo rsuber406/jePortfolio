@@ -5,7 +5,7 @@ const User = require('../models/user.js')
 const authRouter = express.Router()
 
 
-authRouter.post("/signup", async(req,res)=>{
+authRouter.post("/8173/signup", async(req,res)=>{
     try {
         const foundOne = User.findOne({username: req.body.username})
         

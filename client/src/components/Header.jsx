@@ -51,7 +51,7 @@ function showNav(){
                 </Link>
                 </div>
                 <div className="links">
-                    <div style={{backgroundColor: "white"}}>
+                    <div style={{backgroundColor: "white", opacity:0.8, zIndex: 1, position:"relative", top:"50px"}}>
                       {displayNav ? <h2 onClick={showNav}>X</h2> : <h2 onClick={showNav}>&#9776;</h2>}
              {displayNav && <li onClick={()=> scrollToSection(home)} className="link" >Home</li>}
 

@@ -40,6 +40,7 @@ export default function App(){
     <Routes>
 <Route path='/' element={
 <>
+<div style={{display:"flex", flexDirection: "column"}}>
  <div ref={home}>
     <Home ref={home} />
 
@@ -57,6 +58,7 @@ export default function App(){
 
 <div ref={contact}>
     <Contact />
+</div>
 </div>
 </>
 } />
