@@ -97,11 +97,12 @@ function signIn(event){
 }
 
 function logOut(){
+   
     localStorage.removeItem("TokenJe")
     localStorage.removeItem("JeUser")
     setUser(prevState => {
         return{
-            ...prevState,
+            
             user: "",
             token: ""
         }
@@ -140,6 +141,29 @@ function sendEmail(){
     .then(res => console.log(res.status))
     .catch(err => console.log(err.res.data))
 }
+
+function acquirePin(details){
+    if(details.email){
+        axios.post("/api/resetemail", details)
+        .then(res => console.log(res))
+        .catch(err => console.log(err.res.data))
+        return true
+    }
+}
+
+function finishReset(data){
+
+   
+        console.log("it worked")
+        axios.post("/api/resetPass", data)
+        .then(res => console.log(res.data))
+        .catch(err => console.log(err.res.data))
+        return true
+    
+}
+
+
+
 React.useEffect(()=>{
     getVideos()
 },[])
@@ -155,7 +179,9 @@ React.useEffect(()=>{
             handleVideo,
             addVideo,
             createdVideo,
-            sendEmail
+            sendEmail,
+            acquirePin,
+            finishReset
 
         }}>{props.children} </ApiContext.Provider>
     )

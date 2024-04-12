@@ -1,9 +1,10 @@
 import React from "react"
 import "../index.css"
 import {Link} from "react-router-dom"
+import { ApiContext } from "../ApiContext"
 
 export default function Header(props){
-
+ const{logOut} = React.useContext(ApiContext)
   const  windowWidth = window.innerWidth
 const {scrollToSection, home, about, contact, education, user} = props
 const [displayNav, setDisplayNav] = React.useState(false)
@@ -29,7 +30,7 @@ function showNav(){
                 <li onClick={()=> scrollToSection(about)} className="link" >About</li>
                 <li onClick={()=> scrollToSection(education)} className="link">Education</li>
                 <li onClick={()=> scrollToSection(contact)} className="link" >Contact</li>
-               {user ? <Link to="/" className="link">Sign Out</Link> :<Link to="/signin" className="link">Sign In</Link>}
+               {user ? <Link to="/" onClick={logOut} className="link">Sign Out</Link> :<Link to="/signin" className="link">Sign In</Link>}
                {user && <Link to="/admin" className="link">Admin</Link>}
                 </div>
                 </div>
@@ -60,7 +61,7 @@ function showNav(){
               {displayNav && <li onClick={()=> scrollToSection(contact)} className="link" >Contact</li>}
              {displayNav && <div>
 
-               {user ? <Link to="/" className="link">Sign Out</Link> :<Link to="/signin" className="link">Sign In</Link>}
+               {user ? <Link to="/" onClick={logOut} className="link">Sign Out</Link> :<Link to="/signin" className="link">Sign In</Link>}
                {user && <Link to="/admin" className="link">Admin</Link>}
               </div>}
 

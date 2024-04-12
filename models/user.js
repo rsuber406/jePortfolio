@@ -11,6 +11,14 @@ const userSchema = new Schema({
     password: {
         type:String,
         required:true
+    },
+    email:{
+        type: String,
+        default: ""
+    },
+    pin: {
+        type:Number,
+        default: 0
     }
 })
 
@@ -42,8 +50,8 @@ userSchema.methods.withoutPassword = function(){
    
     const user = this.toObject()
     delete user.password
-   
+   delete user.pin
     return user
 }
 
-module.exports = mongoose.model('User', userSchema)
+module.exports = mongoose.model('JeUser', userSchema)

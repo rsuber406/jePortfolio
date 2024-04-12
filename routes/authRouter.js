@@ -52,4 +52,26 @@ authRouter.post('/login', async(req,res)=>{
     }
 })
 
+authRouter.post("/resetPass" , async(req,res) =>{
+    try {
+        
+        const foundOne = await User.findOne({email: req.body.email})
+        if(foundOne){
+         
+            console.log(foundOne.pin == req.body.pin)
+            if(foundOne.pin == req.body.pin){
+                foundOne.password = req.body.password 
+                foundOne.pin = 0
+                console.log('this fired')
+                foundOne.save()
+              
+                res.status(200).send("Success, please go to sign in.")
+            }
+        }
+        else res.status(403).send('Forbidden')
+    } catch (err) {
+        
+    }
+})
+
 module.exports = authRouter

@@ -102,7 +102,7 @@ body{
     
 }
 .myImg{
-    border-radius:50%;
+    border-radius:25%;
     
 }
 
@@ -280,4 +280,14 @@ body{
 }
 .educationCard:hover{
     border:red solid 2px;
+}
+
+.resetPass{
+    color:white;
+}
+
+.resetButton{
+    margin-top:25px;
+    border-radius:25px;
+    cursor: pointer;
 }

@@ -8,6 +8,9 @@ const{ expressjwt} = require('express-jwt')
 
 require('dotenv').config()
 
+const path = require('path')
+const { appendFile } = require('fs')
+
 const server = express()
 
 server.use(morgan('dev'))
@@ -25,6 +28,12 @@ server.use("/api", require('./routes/videoRouter.js'))
 server.use("/api", require('./routes/imgRouterPng.js'))
 
 server.use("/api", require('./routes/emailer.js'))
+
+server.use(express.static(path.join(__dirname, "client", "dist")))
+
+server.get("*", (req,res)=>{
+    res.sendFile(path.join(__dirname, "client", "dist", "index.html"))
+})
 
 server.use((err, req,res,next)=>{
     res.send({errMsg: err.message})
